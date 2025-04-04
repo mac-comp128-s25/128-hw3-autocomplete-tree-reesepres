@@ -24,13 +24,14 @@ public class PrefixTree {
      * @param word
      */
     public void add(String word){
-        //TODO: complete me
         TreeNode current = root;
+
         for(int i = 0; i < word.length(); i++) {
             char letter = word.charAt(i);
             current.children.putIfAbsent(letter, new TreeNode());
             current = current.children.get(letter);
         }
+
         if (!current.isWord) {
             current.isWord = true;
             size++;
@@ -43,8 +44,8 @@ public class PrefixTree {
      * @return true if contained in the tree.
      */
     public boolean contains(String word){
-        //TODO: complete me
         TreeNode current = root;
+
         for( int i = 0; i < word.length(); i++) {
             char letter = word.charAt(i);
             if (!current.children.containsKey(letter)) {
@@ -62,9 +63,9 @@ public class PrefixTree {
      * @return list of words with prefix
      */
     public ArrayList<String> getWordsForPrefix(String prefix){
-        //TODO: complete me
         ArrayList<String> result = new ArrayList<>();
         TreeNode current = root;
+
         for (int i = 0; i < prefix.length(); i++) {
             char letter = prefix.charAt(i);
             if(!current.children.containsKey(letter)) {
@@ -80,6 +81,7 @@ public class PrefixTree {
         if (node.isWord) {
             result.add(prefix);
         }
+        
         for (Map.Entry<Character, TreeNode> entry : node.children.entrySet()) {
             char letter = entry.getKey();
             TreeNode childNode = entry.getValue();
